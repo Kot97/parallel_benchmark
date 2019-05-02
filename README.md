@@ -5,7 +5,7 @@ Benchmark of parallel models:
 In addicion in each language there is also serial solution for each task (in Python one more with usage of numpy)  
 
 Tasks:  
-    1. Vector multiplication  
+    1. Vector element-wise multiplication  
     2. N-th Fibonacci number:  
         a. Recursive  
         b. Recursive with cache  
