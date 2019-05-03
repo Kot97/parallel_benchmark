@@ -4,21 +4,6 @@
 #include <fstream>
 #include <chrono>
 
-int write(const char* filename, const unsigned long* time, const double* value, unsigned long size)
-{
-    if(time == nullptr || value == nullptr || size == 0) return -1;
-
-    std::ofstream file(filename, std::ios_base::out);
-    if(file.bad()) return -2;
-
-    const double *temp_value = value;
-    const unsigned long *temp_time = time;
-    for(unsigned long i = 0; i < size; ++i, ++temp_time, ++temp_value)
-        file << *temp_time << " " << *temp_value << std::endl;
-
-    file.close();
-}
-
 auto get_time = []()
 {
     return std::chrono::time_point_cast<std::chrono::milliseconds> 
@@ -26,5 +11,20 @@ auto get_time = []()
 };
 
 using benchmark_time_t = decltype(get_time());
+
+int write(const char* filename, const unsigned long* task_size, const benchmark_time_t* time_value, unsigned long size)
+{
+    if(task_size == nullptr || time_value == nullptr || size == 0) return -1;
+
+    std::ofstream file(filename, std::ios_base::out);
+    if(file.bad()) return -2;
+
+    const benchmark_time_t *temp_time_value = time_value;
+    const unsigned long *temp_task_size = task_size;
+    for(unsigned long i = 0; i < size; ++i, ++temp_time_value, ++temp_task_size)
+        file << *temp_task_size << " " << *temp_time_value << std::endl;
+
+    file.close();
+}
 
 #endif // !1PARALLEL_BENCHMARK_BENCHMARK_HPP
