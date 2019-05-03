@@ -3,6 +3,7 @@
 
 #include <omp.h>
 #include <stddef.h>
+#include <stdio.h>
 
 void c1_openmp_parallel(double *result, double *a, double *b, unsigned long size)
 {
@@ -19,16 +20,30 @@ void c1_openmp_parallel(double *result, double *a, double *b, unsigned long size
         if(id == count-1) 
             if(size%count != 0)
             {
-                help_temp_result = temp_result;
-                help_temp_a = temp_a;
-                help_temp_b = temp_b;
+                help_temp_result = temp_result - count + 1;
+                help_temp_a = temp_a - count + 1;
+                help_temp_b = temp_b - count + 1;
                 _count = count;
             }
     }
     if(help_temp_result == NULL) return;
 
-    for(unsigned long i = size/_count; i < size; ++i, ++help_temp_result, ++help_temp_a, ++help_temp_b)
+    for(unsigned long i = size - size%_count; i < size; ++i, ++help_temp_result, ++help_temp_a, ++help_temp_b)
         *help_temp_result = *help_temp_a * *help_temp_b;
+}
+
+void c1_openmp_parallel_for(double *result, double *a, double *b, unsigned long size)
+{
+    #pragma omp parallel for 
+    for (unsigned long i = 0; i < size; ++i)
+       result[i] = a[i] * b[i];
+}
+
+void c1_openmp_parallel_for_simd(double *result, double *a, double *b, unsigned long size)
+{
+    #pragma omp parallel for simd 
+    for (unsigned long i = 0; i < size; ++i)
+       result[i] = a[i] * b[i];
 }
 
 #endif // !1PARALLEL_BENCHMARK_OPENMP_1_H
