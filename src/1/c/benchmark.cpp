@@ -4,14 +4,15 @@
 #include "openmp_.h"
 
 // clang++ -o benchmark.out benchmark.cpp -lbenchmark -lbenchmark_main -fopenmp -lpthread
-// ./benchmark.out --benchmark_out="../../../data/1/c/benchmark.json" --benchmark_out_format=json
+// ./benchmark.out --benchmark_out="../../../data/1/c/benchmark.json" --benchmark_out_format=json --benchmark_report_aggregates_only=true
 
 constexpr int multiplier = 10;
 constexpr int min = 100;
 constexpr int max = 100000000;
 constexpr auto unit = benchmark::kMicrosecond;
+constexpr int run_num = 10;
 
-static void serial(benchmark::State& state) 
+static void BM_serial(benchmark::State& state) 
 {
     for (auto _ : state)
     {
@@ -27,8 +28,9 @@ static void serial(benchmark::State& state)
     }
 }
 
-BENCHMARK(serial)->RangeMultiplier(multiplier)->Range(min, max)->Unit(unit)->UseRealTime();
-static void pthread(benchmark::State& state) 
+BENCHMARK(BM_serial)->RangeMultiplier(multiplier)->Range(min, max)->Unit(unit)->UseRealTime()
+                        ->Repetitions(run_num);
+static void BM_pthread(benchmark::State& state) 
 {
     for (auto _ : state)
     {
@@ -43,9 +45,10 @@ static void pthread(benchmark::State& state)
         state.ResumeTiming();
     }
 }
-BENCHMARK(pthread)->RangeMultiplier(multiplier)->Range(min, max)->Unit(unit)->UseRealTime();
+BENCHMARK(BM_pthread)->RangeMultiplier(multiplier)->Range(min, max)->Unit(unit)->UseRealTime()
+                        ->Repetitions(run_num);
 
-static void openmp_parallel(benchmark::State& state) 
+static void BM_openmp_parallel(benchmark::State& state) 
 {
     for (auto _ : state)
     {
@@ -60,9 +63,10 @@ static void openmp_parallel(benchmark::State& state)
         state.ResumeTiming();
     }
 }
-BENCHMARK(openmp_parallel)->RangeMultiplier(multiplier)->Range(min, max)->Unit(unit)->UseRealTime();
+BENCHMARK(BM_openmp_parallel)->RangeMultiplier(multiplier)->Range(min, max)->Unit(unit)->UseRealTime()
+                                ->Repetitions(run_num);
 
-static void openmp_parallel_for(benchmark::State& state) 
+static void BM_openmp_parallel_for(benchmark::State& state) 
 {
     for (auto _ : state)
     {
@@ -77,9 +81,10 @@ static void openmp_parallel_for(benchmark::State& state)
         state.ResumeTiming();
     }
 }
-BENCHMARK(openmp_parallel_for)->RangeMultiplier(multiplier)->Range(min, max)->Unit(unit)->UseRealTime(); 
+BENCHMARK(BM_openmp_parallel_for)->RangeMultiplier(multiplier)->Range(min, max)->Unit(unit)->UseRealTime()
+                                    ->Repetitions(run_num); 
 
-static void openmp_parallel_for_simd(benchmark::State& state) 
+static void BM_openmp_parallel_for_simd(benchmark::State& state) 
 {
     for (auto _ : state)
     {
@@ -94,4 +99,5 @@ static void openmp_parallel_for_simd(benchmark::State& state)
         state.ResumeTiming();
     }
 }
-BENCHMARK(openmp_parallel_for_simd)->RangeMultiplier(multiplier)->Range(min, max)->Unit(unit)->UseRealTime();
+BENCHMARK(BM_openmp_parallel_for_simd)->RangeMultiplier(multiplier)->Range(min, max)->Unit(unit)->UseRealTime()
+                                        ->Repetitions(run_num);
