@@ -1,6 +1,6 @@
 Benchmark of parallel models:  
     C: pthreads, OpenMP  
-    C++: thread standard library, Intel TBB, PSTL  
+    C++: thread standard library, Intel TBB,  
     Python: thread, process  
 In addicion in each language there is also serial solution for each task (in Python one more with usage of numpy)  
 
@@ -24,8 +24,8 @@ Project structure:
     /plot/task/ - contain plots of task size vs execution time for asymptotically best results in each model  
     /plot/ - contain plot of task size vs execution time for 2 asymptotically best results in each task and plotting.py
 
-Unit tests: gtest/pytest
-Benchmarks: Google benchmark
+Unit tests: googletest/pytest
+Benchmarks: googlebenchmark
 Plots: matplotlib
 
 Environment:  
