@@ -3,7 +3,6 @@
 
 #include <thread>
 #include <vector>
-#include <cstdlib>
 
 unsigned int num_threads = std::thread::hardware_concurrency();
 
