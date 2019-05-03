@@ -22,7 +22,7 @@ void __cpp1_thread(int id, double *result, double *a, double *b, unsigned long s
     }
 } 
 
-void cpp1_thread(double *result, double *a, double *b, unsigned long size, int num_threads=4)
+void cpp1_thread(double *result, double *a, double *b, unsigned long size)
 {
     std::vector<std::thread> threads;
 
