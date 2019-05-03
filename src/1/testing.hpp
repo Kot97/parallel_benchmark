@@ -1,6 +1,6 @@
 #ifndef PARALLEL_BENCHMARK_TESTING_1_HPP
 #define PARALLEL_BENCHMARK_TESTING_1_HPP
-#include <memory.h>
+#include <stdlib.h>
 #include <gtest/gtest.h>
 
 double *res, *a, *b;
