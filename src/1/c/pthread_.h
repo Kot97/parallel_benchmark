@@ -13,7 +13,7 @@ struct arg
     unsigned long size;
 };
 
-void* __c1_pthread(void* f_arg)
+void* _c1_pthread(void* f_arg)
 {
     arg x = *(arg*)f_arg;
     unsigned long end = x.size / x.num_threads;
@@ -46,7 +46,7 @@ void c1_pthread(double *result, const double *a, const double *b, unsigned long 
         args[i].result = result + i;
         args[i].size = size;
 
-        pthread_create(&threads[i], NULL, __c1_pthread, &args[i]);
+        pthread_create(&threads[i], NULL, _c1_pthread, &args[i]);
     }
 
     for(int i = 0; i < num_threads; ++i)
