@@ -16,11 +16,11 @@ Sizes of tasks:
 
 Project structure:  
     /src/task/model/ - contain code which generate time data for plotting  
-    /src/task/model/test/ - contain unit tests for model
     /data/task/model/ - contain time data for plotting  
     /plot/task/model/ - contain plots of task size vs execution time in model  
     /plot/task/ - contain plots of task size vs execution time for asymptotically best results in each model  
     /plot/ - contain plot of task size vs execution time for 2 asymptotically best results in each task and plotting.py
+    /test/ - contain unit tests
 
 Unit tests: googletest  
 Benchmarks: googlebenchmark  
