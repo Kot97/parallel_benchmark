@@ -19,7 +19,7 @@ Project structure:
     /data/task/model/ - contain time data for plotting  
     /plot/task/model/ - contain plots of task size vs execution time in model  
     /plot/task/ - contain plots of task size vs execution time for asymptotically best results in each model  
-    /plot/ - contain plot of task size vs execution time for 2 asymptotically best results in each task and plotting.py
+    /plot/ - contain plot of task size vs execution time for 2 asymptotically best results in each task and plotting.py  
     /test/ - contain unit tests
 
 Unit tests: googletest  
