@@ -18,4 +18,31 @@ TEST(NullInput, Tbb)
     cpp1_tbb(nullptr, nullptr, nullptr, 0);
 }
 
+TEST_P(VectorMultNotSetTest, Std)
+{
+    cpp1_thread(res, a, b, size);
+}
+TEST_P(VectorMultNotSetTest, Tbb)
+{
+    cpp1_tbb(res, a, b, size);
+}
+
+TEST_P(VectorMultSetTest, Std)
+{
+    cpp1_thread(res, a, b, size);
+}
+TEST_P(VectorMultSetTest, Tbb)
+{
+    cpp1_tbb(res, a, b, size);
+}
+
+TEST_P(VectorMultTest, Std)
+{
+    cpp1_thread(res, a, b, size);
+}
+TEST_P(VectorMultTest, Tbb)
+{
+    cpp1_tbb(res, a, b, size);
+}
+
 #endif // !1PARALLEL_BENCHMARK_TEST_C_VECTOR_MULT

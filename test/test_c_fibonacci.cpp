@@ -1,7 +1,7 @@
 #include "../src/2/c/serial_.h"
 #include "test_fibonacci.hpp"
 
-// clang++ -o test_serial.test test_serial.cpp -lgtest -lgtest_main -lpthread
+// clang++ -o c_fibonacci.test test_c_fibonacci.cpp -lgtest -lgtest_main -lpthread
 
 TEST_P(FibonacciTest, SerialRec)
 {
