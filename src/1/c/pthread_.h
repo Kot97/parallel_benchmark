@@ -7,7 +7,8 @@
 
 struct arg
 {
-    double *result, *a, *b;
+    double *result;
+    const double *a, *b;
     int id, num_threads;
     unsigned long size;
 };
@@ -31,7 +32,7 @@ void* __c1_pthread(void* f_arg)
     return NULL;
 } 
 
-void c1_pthread(double *result, double *a, double *b, unsigned long size, int num_threads=4)
+void c1_pthread(double *result, const double *a, const double *b, unsigned long size, int num_threads=4)
 {
     pthread_t* threads = (pthread_t*)malloc(sizeof(pthread_t)*num_threads);
     arg* args = (arg*)malloc(sizeof(arg)*num_threads);

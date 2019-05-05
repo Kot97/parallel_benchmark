@@ -3,7 +3,7 @@
 
 #include <tbb/parallel_for.h>
 
-void cpp1_tbb(double *result, double *a, double *b, unsigned long size)
+void cpp1_tbb(double *result, const double *a, const double *b, unsigned long size)
 {
     tbb::parallel_for(0ul, size, [&](const unsigned long& i)
     {   

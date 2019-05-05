@@ -6,7 +6,7 @@
 
 unsigned int num_threads = std::thread::hardware_concurrency();
 
-void __cpp1_thread(int id, double *result, double *a, double *b, unsigned long size)
+void __cpp1_thread(int id, double *result, const double *a, const double *b, unsigned long size)
 {
     unsigned long end = size / num_threads;
     for(unsigned long i = 0; i < end; ++i, result+=num_threads, a+=num_threads, b+=num_threads)
@@ -22,7 +22,7 @@ void __cpp1_thread(int id, double *result, double *a, double *b, unsigned long s
     }
 } 
 
-void cpp1_thread(double *result, double *a, double *b, unsigned long size)
+void cpp1_thread(double *result, const double *a, const double *b, unsigned long size)
 {
     std::vector<std::thread> threads;
 
