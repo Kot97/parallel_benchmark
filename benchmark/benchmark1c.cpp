@@ -1,16 +1,10 @@
-#include <benchmark/benchmark.h>
-#include "serial_.h"
-#include "pthread_.h"
-#include "openmp_.h"
+#include "parameters.hpp"
+#include "../src/1/c/serial_.h"
+#include "../src/1/c/pthread_.h"
+#include "../src/1/c/openmp_.h"
 
-// clang++ -o benchmark.out benchmark.cpp -lbenchmark -lbenchmark_main -fopenmp -lpthread
-// ./benchmark.out --benchmark_out="../../../data/1/c/benchmark.json" --benchmark_out_format=json --benchmark_report_aggregates_only=true
-
-constexpr int multiplier = 10;
-constexpr int min = 100;
-constexpr int max = 100000000;
-constexpr auto unit = benchmark::kMicrosecond;
-constexpr int run_num = 10;
+// clang++ -o benchmark1c.out benchmark1c.cpp -lbenchmark -lbenchmark_main -fopenmp -lpthread
+// ./benchmark1c.out --benchmark_out="../data/benchmark1c.json" --benchmark_out_format=json --benchmark_report_aggregates_only=true
 
 static void BM_serial(benchmark::State& state) 
 {
