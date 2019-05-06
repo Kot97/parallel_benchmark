@@ -4,7 +4,7 @@
 #include "../src/1/c/openmp_.h"
 
 // clang++ -o benchmark1c.out benchmark1c.cpp -lbenchmark -lbenchmark_main -fopenmp -lpthread
-// ./benchmark1c.out --benchmark_out="../data/benchmark1c.json" --benchmark_out_format=json --benchmark_report_aggregates_only=true
+// ./benchmark1c.out --benchmark_out="../data/1/benchmark1c.json" --benchmark_out_format=json --benchmark_report_aggregates_only=true
 
 static void BM_serial(benchmark::State& state) 
 {

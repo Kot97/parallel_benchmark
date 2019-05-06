@@ -4,7 +4,7 @@
 #include "../src/1/cpp/tbb_.hpp"
 
 // clang++ -o benchmark1cpp.out benchmark1cpp.cpp -lbenchmark -lbenchmark_main -lpthread -ltbb
-// ./benchmark1cpp.out --benchmark_out="../data/benchmark1cpp.json" --benchmark_out_format=json --benchmark_report_aggregates_only=true
+// ./benchmark1cpp.out --benchmark_out="../data/1/benchmark1cpp.json" --benchmark_out_format=json --benchmark_report_aggregates_only=true
 
 static void BM_serial(benchmark::State& state) 
 {
