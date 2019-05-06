@@ -6,99 +6,15 @@
 // clang++ -o benchmark2cpp.out benchmark2cpp.cpp -lbenchmark -lbenchmark_main -lpthread -ltbb
 // ./benchmark2cpp.out --benchmark_out="../data/1/benchmark2cpp.json" --benchmark_out_format=json --benchmark_report_aggregates_only=true
 
-static void BM_serial_rec(benchmark::State& state) 
-{
-    for (auto _ : state)
-    {
-        cpp2_serial_rec(state.range(0));
-    }
-}
-BENCHMARK(BM_serial_rec)->Apply(args1)->Unit(unit)->UseRealTime()->Repetitions(run_num);
+BENCHMARK_FIBONACCI(BM_serial_rec, cpp2_serial_rec)
+BENCHMARK_FIBONACCI_MAP(BM_serial_rec_dict, cpp2_serial_rec_dict, map)
+BENCHMARK_FIBONACCI(BM_serial_iter, cpp2_serial_iter)
 
-static void BM_serial_rec_dict(benchmark::State& state) 
-{
-    for (auto _ : state)
-    {
-        state.PauseTiming();
-        map.clear();
-        state.ResumeTiming();
-        cpp2_serial_rec_dict(state.range(0));
-    }
-}
-BENCHMARK(BM_serial_rec_dict)->Apply(args2)->Unit(unit)->UseRealTime()->Repetitions(run_num);
+BENCHMARK_FIBONACCI(BM_std_async, cpp2_async)
+BENCHMARK_FIBONACCI_MAP(BM_std_async_dict, cpp2_async_dict, map2)
 
-static void BM_serial_iter(benchmark::State& state) 
-{
-    for (auto _ : state)
-    {
-        cpp2_serial_iter(state.range(0));
-    }
-}
-BENCHMARK(BM_serial_iter)->Apply(args2)->Unit(unit)->UseRealTime()->Repetitions(run_num);
+BENCHMARK_FIBONACCI(BM_std_task, cpp2_task)
+BENCHMARK_FIBONACCI_MAP(BM_std_task_dict, cpp2_task_dict, map2)
 
-// -------------------------------------------------------------------------------------
-
-static void BM_std_async(benchmark::State& state) 
-{
-    for (auto _ : state)
-    {
-        cpp2_async(state.range(0));
-    }
-}
-BENCHMARK(BM_std_async)->Apply(args1)->Unit(unit)->UseRealTime()->Repetitions(run_num);
-
-static void BM_std_async_dict(benchmark::State& state) 
-{
-    for (auto _ : state)
-    {
-        state.PauseTiming();
-        map2.clear();
-        state.ResumeTiming();
-        cpp2_async_dict(state.range(0));
-    }
-}
-BENCHMARK(BM_std_async_dict)->Apply(args1)->Unit(unit)->UseRealTime()->Repetitions(run_num);
-
-static void BM_std_task(benchmark::State& state) 
-{
-    for (auto _ : state)
-    {
-        cpp2_task(state.range(0));
-    }
-}
-BENCHMARK(BM_std_task)->Apply(args1)->Unit(unit)->UseRealTime()->Repetitions(run_num);
-
-static void BM_std_task_dict(benchmark::State& state) 
-{
-    for (auto _ : state)
-    {
-        state.PauseTiming();
-        map2.clear();
-        state.ResumeTiming();
-        cpp2_task_dict(state.range(0));
-    }
-}
-BENCHMARK(BM_std_task_dict)->Apply(args1)->Unit(unit)->UseRealTime()->Repetitions(run_num);
-
-// -----------------------------------------------------------------------------------
-
-static void BM_tbb(benchmark::State& state) 
-{
-    for (auto _ : state)
-    {
-        cpp2_tbb(state.range(0));
-    }
-}
-BENCHMARK(BM_tbb)->Apply(args1)->Unit(unit)->UseRealTime()->Repetitions(run_num);
-
-static void BM_tbb_dict(benchmark::State& state) 
-{
-    for (auto _ : state)
-    {
-        state.PauseTiming();
-        cache.clear();
-        state.ResumeTiming();
-        cpp2_tbb_dict(state.range(0));
-    }
-}
-BENCHMARK(BM_tbb_dict)->Apply(args2)->Unit(unit)->UseRealTime()->Repetitions(run_num);
+BENCHMARK_FIBONACCI(BM_tbb, cpp2_tbb)
+BENCHMARK_FIBONACCI_MAP(BM_tbb_dict, cpp2_tbb_dict, cache)
