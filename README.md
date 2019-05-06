@@ -10,10 +10,6 @@ Tasks:
         c. Iterative  
     3. Finding maximum value in vector  
 
-Sizes of tasks:  
-    1 and 3: 10^k, k = {3,...,8}  
-    2: 10^k, k = {1,...,5}  
-
 Project structure:  
     /src/task/model/ - contain code which generate time data for plotting  
     /data/task/model/ - contain time data for plotting  
