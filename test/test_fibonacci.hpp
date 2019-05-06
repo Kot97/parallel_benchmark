@@ -19,13 +19,13 @@ INSTANTIATE_TEST_SUITE_P(NegativeAndZero, FibonacciTest,
     std::make_pair(8, 21),
     std::make_pair(10, 55),
     std::make_pair(15, 610),
-    std::make_pair(20, 6765),
-    std::make_pair(40, 102334155)
+    std::make_pair(20, 6765)
  ));
 
 class Fibonacci2Test : public ::testing::TestWithParam<std::pair<long, unsigned long>> { };
 INSTANTIATE_TEST_SUITE_P(BigNumbers, Fibonacci2Test, 
 ::testing::Values(
+    std::make_pair(40, 102334155),
     std::make_pair(45, 1134903170),
     std::make_pair(50, 12586269025),
     std::make_pair(60, 1548008755920),

@@ -5,8 +5,6 @@
 #include "../src/1/c/pthread_.h"
 #include "test_vector_mult.hpp"
 
-// clang++ -o c_vector_mult.test test_c_vector_mult.cpp -lgtest -lgtest_main -fopenmp -lpthread
-
 TEST(NullInput, Pthread)
 {
     c1_pthread(NULL, NULL, NULL, 0);

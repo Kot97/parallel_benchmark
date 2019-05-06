@@ -1,5 +1,6 @@
 #ifndef PARALLEL_BENCHMARK_VECTOR_MULT_TEST_HPP
 #define PARALLEL_BENCHMARK_VECTOR_MULT_TEST_HPP
+
 #include <gtest/gtest.h>
 #include <stdlib.h>
 #include <tuple>
