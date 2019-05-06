@@ -3,7 +3,6 @@
 
 #include <tbb/task.h>
 #include <tbb/concurrent_hash_map.h>
-#include <iostream>
 
 unsigned long cpp2_serial_rec_p(long n)
 {
