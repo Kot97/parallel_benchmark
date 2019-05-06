@@ -2,7 +2,7 @@ Benchmark of parallel models:
     C: pthreads, OpenMP  
     C++: thread standard library, Intel TBB  
 
-Tasks:  
+Problems:  
     1. Vector element-wise multiplication  
     2. N-th Fibonacci number:  
         a. Recursive  
@@ -11,18 +11,17 @@ Tasks:
     3. Finding maximum value in vector  
 
 Project structure:  
-    /src/task/model/ - contain code which generate time data for plotting  
-    /data/task/model/ - contain time data for plotting  
-    /plot/task/model/ - contain plots of task size vs execution time in model  
-    /plot/task/ - contain plots of task size vs execution time for asymptotically best results in each model  
-    /plot/ - contain plot of task size vs execution time for 2 asymptotically best results in each task and plotting.py  
-    /test/ - contain unit tests
+    /src/task/model/ - contain solutions of problems in C and C++  
+    /benchmark/ - contain code which generate time data  
+    /data/env/ - contain time data for plotting  
+    /plot/env/ - contain plots of task size vs execution time  
+    /test/ - contain unit tests of solutions  
 
 Unit tests: googletest  
 Benchmarks: googlebenchmark  
 Plots: matplotlib  
 
-Environment:  
-    Ubuntu 19.04 Linux 5.0.0 64 bit  
-    Intel Core i5-3570K 3.40 GHz (4 threads)  
-    3.8 GiB RAM  
+Environment: 
+1)Ubuntu 19.04 Linux 5.0.0 64 bit  
+  Intel Core i5-3570K 3.40 GHz (4 threads)  
+  3.8 GiB RAM  
