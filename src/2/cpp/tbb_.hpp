@@ -11,7 +11,7 @@ unsigned long cpp2_serial_rec_p(long n)
 }
 
 using cache_t = tbb::concurrent_hash_map<long, unsigned long>;
-cache_t cache;
+cache_t cache; 
 
 unsigned long cpp2_serial_rec_dict_p(long n)
 {
