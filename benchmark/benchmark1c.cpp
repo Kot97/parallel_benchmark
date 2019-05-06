@@ -1,4 +1,4 @@
-#include "parameters.hpp"
+#include "parameters1.hpp"
 #include "../src/1/c/serial_.h"
 #include "../src/1/c/pthread_.h"
 #include "../src/1/c/openmp_.h"
