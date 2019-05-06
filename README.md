@@ -21,7 +21,7 @@ Unit tests: googletest
 Benchmarks: googlebenchmark  
 Plots: matplotlib  
 
-Environment: 
+Environment:  
 1)Ubuntu 19.04 Linux 5.0.0 64 bit  
   Intel Core i5-3570K 3.40 GHz (4 threads)  
   3.8 GiB RAM  
