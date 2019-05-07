@@ -22,14 +22,13 @@ T cpp3_tbb_reduce(const T *a, const T *b)
     });
 }
 
-constexpr unsigned int search_cutoff = 6;
-
 template<typename T>
 class search_task : public tbb::task
 {
 public:
     const T *a, *b;
     T *const max;
+    static unsigned int search_cutoff;
     search_task(const T *a_, const T *b_, T *max_) : a(a_), b(b_), max(max_) {}
 
     tbb::task* execute() override
@@ -49,11 +48,13 @@ public:
         return nullptr;
     }
 };
+template<typename T>
+unsigned int search_task<T>::search_cutoff = 1000;
 
 template<typename T>
 T cpp3_tbb_task(const T *a, const T *b)
 {
-    if(b - a < search_cutoff) cpp3_serial(a, b);
+    if(b - a < search_task<T>::search_cutoff) cpp3_serial(a, b);
     T max;
     search_task<T> *task = new(tbb::task::allocate_root()) search_task<T>(a, b, &max);
     tbb::task::spawn_root_and_wait(*task);
