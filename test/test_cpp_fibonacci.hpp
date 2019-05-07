@@ -6,61 +6,17 @@
 #include "../src/2/cpp/tbb_.hpp"
 #include "test_fibonacci.hpp"
 
-TEST_P(FibonacciTest, CppSerialRec)
-{
-    EXPECT_EQ(cpp2_serial_rec(GetParam().first), GetParam().second);
-}
+TEST_FIBONACCI(CppSerialRec, cpp2_serial_rec)
+TEST_FIBONACCI2(CppSerialRecDict, cpp2_serial_rec_dict)
+TEST_FIBONACCI2(CppSerialIter, cpp2_serial_iter)
 
-TEST_P(FibonacciTest, CppSerialRecDict)
-{
-    EXPECT_EQ(cpp2_serial_rec_dict(GetParam().first), GetParam().second);
-}
-TEST_P(Fibonacci2Test, CppSerialRecDict)
-{
-    EXPECT_EQ(cpp2_serial_rec_dict(GetParam().first), GetParam().second);
-}
+TEST_FIBONACCI(CppTask, cpp2_task)
+TEST_FIBONACCI(CppAsync, cpp2_async)
 
-TEST_P(FibonacciTest, CppSerialIter)
-{
-    EXPECT_EQ(cpp2_serial_iter(GetParam().first), GetParam().second);
-}
-TEST_P(Fibonacci2Test, CppSerialIter)
-{
-    EXPECT_EQ(cpp2_serial_iter(GetParam().first), GetParam().second);
-}
+TEST_FIBONACCI(CppTaskDict, cpp2_task_dict)
+TEST_FIBONACCI(CppAsyncDict, cpp2_async_dict)
 
-TEST_P(FibonacciTest, CppTask)
-{
-    EXPECT_EQ(cpp2_task(GetParam().first), GetParam().second);
-}
-
-TEST_P(FibonacciTest, CppAsync)
-{
-    EXPECT_EQ(cpp2_async(GetParam().first), GetParam().second);
-}
-
-TEST_P(FibonacciTest, CppTaskDict)
-{
-    EXPECT_EQ(cpp2_task_dict(GetParam().first), GetParam().second);
-}
-
-TEST_P(FibonacciTest, CppAsyncDict)
-{
-    EXPECT_EQ(cpp2_async_dict(GetParam().first), GetParam().second);
-}
-
-TEST_P(FibonacciTest, Tbb)
-{
-    EXPECT_EQ(cpp2_tbb(GetParam().first), GetParam().second);
-}
-
-TEST_P(FibonacciTest, TbbDict)
-{
-    EXPECT_EQ(cpp2_tbb_dict(GetParam().first), GetParam().second);
-}
-TEST_P(Fibonacci2Test, TbbDict)
-{
-    EXPECT_EQ(cpp2_tbb_dict(GetParam().first), GetParam().second);
-}
+TEST_FIBONACCI(Tbb, cpp2_tbb)
+TEST_FIBONACCI2(TbbDict, cpp2_tbb_dict)
 
 #endif // !1PARALLEL_BENCHMARK_TEST_CPP_FIBONACCI

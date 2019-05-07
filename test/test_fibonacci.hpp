@@ -33,4 +33,20 @@ INSTANTIATE_TEST_SUITE_P(BigNumbers, Fibonacci2Test,
     std::make_pair(80, 23416728348467685)
 ));
 
+#define TEST_FIBONACCI(test_name, function_name)\
+TEST_P(FibonacciTest, test_name)\
+{\
+    EXPECT_EQ(function_name(GetParam().first), GetParam().second);\
+}
+
+#define TEST_FIBONACCI2(test_name, function_name)\
+TEST_P(FibonacciTest, test_name)\
+{\
+    EXPECT_EQ(function_name(GetParam().first), GetParam().second);\
+}\
+TEST_P(Fibonacci2Test, test_name)\
+{\
+    EXPECT_EQ(function_name(GetParam().first), GetParam().second);\
+}
+
 #endif //!PARALLEL_BENCHMARK_FIBONACCI_TEST_HPP

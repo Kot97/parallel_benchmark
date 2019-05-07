@@ -5,50 +5,12 @@
 #include "../src/2/c/openmp_.h"
 #include "test_fibonacci.hpp"
 
-TEST_P(FibonacciTest, SerialRec)
-{
-    EXPECT_EQ(c2_serial_rec(GetParam().first), GetParam().second);
-}
+TEST_FIBONACCI(SerialRec, c2_serial_rec)
+TEST_FIBONACCI2(SerialRecDict, c2_serial_rec_dict)
+TEST_FIBONACCI2(SerialIter, c2_serial_iter)
 
-TEST_P(FibonacciTest, SerialRecDict)
-{
-    EXPECT_EQ(c2_serial_rec_dict(GetParam().first), GetParam().second);
-}
-TEST_P(Fibonacci2Test, SerialRecDict)
-{
-    EXPECT_EQ(c2_serial_rec_dict(GetParam().first), GetParam().second);
-}
-
-TEST_P(FibonacciTest, SerialIter)
-{
-    EXPECT_EQ(c2_serial_iter(GetParam().first), GetParam().second);
-}
-TEST_P(Fibonacci2Test, SerialIter)
-{
-    EXPECT_EQ(c2_serial_iter(GetParam().first), GetParam().second);
-}
-
-TEST_P(FibonacciTest, OpenmpTaskRec)
-{
-    EXPECT_EQ(c2_openmp_task_rec(GetParam().first), GetParam().second);
-}
-
-TEST_P(FibonacciTest, OpenmpTaskRecDictLock)
-{
-    EXPECT_EQ(c2_openmp_task_rec_dict_lock(GetParam().first), GetParam().second);
-}
-TEST_P(Fibonacci2Test, OpenmpTaskRecDictLock)
-{
-    EXPECT_EQ(c2_openmp_task_rec_dict_lock(GetParam().first), GetParam().second);
-}
-
-TEST_P(FibonacciTest, OpenmpTaskRecDictCritical)
-{
-    EXPECT_EQ(c2_openmp_task_rec_dict_critical(GetParam().first), GetParam().second);
-}
-TEST_P(Fibonacci2Test, OpenmpTaskRecDictCritical)
-{
-    EXPECT_EQ(c2_openmp_task_rec_dict_critical(GetParam().first), GetParam().second);
-}
+TEST_FIBONACCI(OpenmpTaskRec, c2_openmp_task_rec)
+TEST_FIBONACCI2(OpenmpTaskRecDictLock, c2_openmp_task_rec_dict_lock)
+TEST_FIBONACCI2(OpenmpTaskRecDictCritical, c2_openmp_task_rec_dict_critical)
 
 #endif // !1PARALLEL_BENCHMARK_TEST_C_FIBONACCI

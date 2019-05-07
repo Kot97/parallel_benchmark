@@ -136,4 +136,25 @@ INSTANTIATE_TEST_SUITE_P(Double, VectorMultTest,
     std::make_tuple(std::vector<double>{1001,1002,1003,10019}, std::vector<double>{1,1.0,1,1.0}, std::vector<double>{1001,1002.0,1003,10019})
 ));
 
+#define TEST_NULL_INPUT(test_name, function_name)\
+TEST(NullInput, test_name)\
+{\
+    function_name(NULL, NULL, NULL, 0);\
+    function_name(nullptr, nullptr, nullptr, 0);\
+}
+
+#define TEST_VECTOR_MULT(test_name, function_name)\
+TEST_P(VectorMultNotSetTest, test_name)\
+{\
+    function_name(res, a, b, size);\
+}\
+TEST_P(VectorMultSetTest, test_name)\
+{\
+    function_name(res, a, b, size);\
+}\
+TEST_P(VectorMultTest, test_name)\
+{\
+    function_name(res, a, b, size);\
+}
+
 #endif // !1PARALLEL_BENCHMARK_VECTOR_MULT_TEST_HPP
