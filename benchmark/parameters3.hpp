@@ -2,6 +2,7 @@
 #define PARALLEL_BENCHMARK_BENCHMARK_PARAMETERS_2_HPP
 
 #include <benchmark/benchmark.h>
+#include <cstdlib>
 
 constexpr int multiplier = 10;
 constexpr int min = 10;
