@@ -4,10 +4,11 @@
 #include <stdlib.h>
 #include <omp.h>
 #include "dictionary.h"
+#include "serial_.h"
 
 unsigned long _c2_openmp_task_rec(long n)
 {
-    if(n <= 2)  return 1;
+    if(n < CUTOFF2) return c2_serial_rec(n);
     unsigned long ret, ret2;
     #pragma omp task shared(ret)
         ret = _c2_openmp_task_rec(n-1);
@@ -19,6 +20,7 @@ unsigned long _c2_openmp_task_rec(long n)
 
 unsigned long c2_openmp_task_rec(long n)
 {
+    if(n < CUTOFF2) return c2_serial_rec(n);
     unsigned long ret;
     #pragma omp parallel
         #pragma omp single
@@ -30,12 +32,10 @@ omp_lock_t dictionary_lock[DCACHE_SIZE];
 
 unsigned long _c2_openmp_task_rec_dict_lock(long n)
 {
-    if (n <= 2)
-        return 1;
-    if (n < DCACHE_SIZE) 
+    if(n < CUTOFF2) return c2_serial_rec_dict(n);
+    if(n < DCACHE_SIZE) 
     {
-        if (dictionary[n] != 0)
-            return dictionary[n];
+        if (dictionary[n] != 0) return dictionary[n];
         else
         {
             unsigned long i, j;
@@ -64,6 +64,7 @@ unsigned long _c2_openmp_task_rec_dict_lock(long n)
 
 unsigned long c2_openmp_task_rec_dict_lock(long n)
 {
+    if(n < CUTOFF2) return c2_serial_rec_dict(n);
     unsigned long ret;
     #pragma omp parallel
     {
@@ -81,12 +82,10 @@ unsigned long c2_openmp_task_rec_dict_lock(long n)
 
 unsigned long _c2_openmp_task_rec_dict_critical(long n)
 {
-    if (n <= 2)
-        return 1;
-    if (n < DCACHE_SIZE) 
+    if(n < CUTOFF2) return c2_serial_rec_dict(n);
+    if(n < DCACHE_SIZE) 
     {
-        if (dictionary[n] != 0)
-            return dictionary[n];
+        if (dictionary[n] != 0) return dictionary[n];
         else
         {
             unsigned long i, j;
@@ -114,12 +113,11 @@ unsigned long _c2_openmp_task_rec_dict_critical(long n)
 
 unsigned long c2_openmp_task_rec_dict_critical(long n)
 {
+    if(n < CUTOFF2) return c2_serial_rec_dict(n);
     unsigned long ret;
     #pragma omp parallel
-    {
         #pragma omp single
             ret = _c2_openmp_task_rec_dict_critical(n);
-    }
     return ret;
 }
 

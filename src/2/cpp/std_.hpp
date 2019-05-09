@@ -5,10 +5,11 @@
 #include <thread>
 #include <future>
 #include <functional>
+#include "serial_.hpp"
 
 unsigned long cpp2_task(long n)
 {
-    if(n <= 2)  return 1;
+    if(n < CUTOFF2) return cpp2_serial_rec(n);
     std::packaged_task<unsigned long()> task1(std::bind(cpp2_task, n-1));
     std::packaged_task<unsigned long()> task2(std::bind(cpp2_task, n-2));
     std::future<unsigned long> i = task1.get_future();
@@ -21,7 +22,7 @@ unsigned long cpp2_task(long n)
 
 unsigned long cpp2_async(long n)
 {
-    if(n <= 2)  return 1;
+    if(n < CUTOFF2) return cpp2_serial_rec(n);
     auto task1 = std::async(std::launch::async, cpp2_task, n-1);
     auto task2 = std::async(std::launch::async, cpp2_task, n-2);
     return task1.get() + task2.get();
@@ -32,7 +33,7 @@ std::mutex mutex;
 
 unsigned long cpp2_task_dict(long n)
 {
-    if (n <= 2) return 1;
+    if(n < CUTOFF2) return cpp2_serial_rec_dict(n);
     if (map2.find(n) != map2.end()) return map2[n];
     else
     {
@@ -53,7 +54,7 @@ unsigned long cpp2_task_dict(long n)
 
 unsigned long cpp2_async_dict(long n)
 {
-    if (n <= 2) return 1;
+    if(n < CUTOFF2) return cpp2_serial_rec_dict(n);
     if (map2.find(n) != map2.end()) return map2[n];
     else
     {

@@ -9,6 +9,7 @@
 template<typename T>
 T cpp3_tbb_reduce(const T *a, const T *b)
 {
+    if(b - a < CUTOFF3) return cpp3_serial(a, b);
     return tbb::parallel_reduce(tbb::blocked_range<const T*>(a, b), *a, 
     [&](const auto& r, T temp)
     {
@@ -28,13 +29,12 @@ class search_task : public tbb::task
 public:
     const T *a, *b;
     T *const max;
-    static unsigned int search_cutoff;
     search_task(const T *a_, const T *b_, T *max_) : a(a_), b(b_), max(max_) {}
 
     tbb::task* execute() override
     {
         unsigned long size = b - a;
-        if(size < search_cutoff) *max = cpp3_serial(a, b);
+        if(size < CUTOFF3) *max = cpp3_serial(a, b);
         else
         {
             T i, j;
@@ -48,13 +48,11 @@ public:
         return nullptr;
     }
 };
-template<typename T>
-unsigned int search_task<T>::search_cutoff = 1000;
 
 template<typename T>
 T cpp3_tbb_task(const T *a, const T *b)
 {
-    if(b - a < search_task<T>::search_cutoff) cpp3_serial(a, b);
+    if(b - a < CUTOFF3) cpp3_serial(a, b);
     T max;
     search_task<T> *task = new(tbb::task::allocate_root()) search_task<T>(a, b, &max);
     tbb::task::spawn_root_and_wait(*task);

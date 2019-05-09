@@ -4,9 +4,12 @@
 #include <omp.h>
 #include <stddef.h>
 #include <stdio.h>
+#include "serial_.h"
 
 void c1_openmp_parallel(double *result, const double *a, const double *b, unsigned long size)
 {
+    if(size < CUTOFF1) { c1_serial(result, a, b, size); return; }
+    
     double *help_temp_result = NULL;
     const double *help_temp_a = NULL, *help_temp_b = NULL;
     int _count;
@@ -36,6 +39,8 @@ void c1_openmp_parallel(double *result, const double *a, const double *b, unsign
 
 void c1_openmp_parallel_for(double *result, const double *a, const double *b, unsigned long size)
 {
+    if(size < CUTOFF1) { c1_serial(result, a, b, size); return; }
+
     #pragma omp parallel for 
     for (unsigned long i = 0; i < size; ++i)
        result[i] = a[i] * b[i];
@@ -43,6 +48,8 @@ void c1_openmp_parallel_for(double *result, const double *a, const double *b, un
 
 void c1_openmp_parallel_for_simd(double *result, const double *a, const double *b, unsigned long size)
 {
+    if(size < CUTOFF1) { c1_serial(result, a, b, size); return; }
+
     #pragma omp parallel for simd 
     for (unsigned long i = 0; i < size; ++i)
        result[i] = a[i] * b[i];

@@ -4,6 +4,7 @@
 #include <pthread.h>
 #include <stddef.h>
 #include <stdlib.h>
+#include "serial_.h"
 
 struct arg
 {
@@ -34,6 +35,8 @@ void* _c1_pthread(void* f_arg)
 
 void c1_pthread(double *result, const double *a, const double *b, unsigned long size, int num_threads=4)
 {
+    if(size < CUTOFF1) { c1_serial(result, a, b, size); return; }
+
     pthread_t* threads = (pthread_t*)malloc(sizeof(pthread_t)*num_threads);
     arg* args = (arg*)malloc(sizeof(arg)*num_threads);
 
