@@ -1,14 +1,34 @@
 #ifndef PARALLEL_BENCHMARK_BENCHMARK_PARAMETERS_2_HPP
 #define PARALLEL_BENCHMARK_BENCHMARK_PARAMETERS_2_HPP
 
+#include "spec.hpp"
 #include <benchmark/benchmark.h>
 #include <cstdlib>
 
+#ifdef PARALLEL_BENCHMARK_LOW_SPEC
+
+constexpr int max = 10000000;
+constexpr int run_num = 3;
+
+#endif // PARALLEL_BENCHMARK_LOW_SPEC
+
+#ifdef PARALLEL_BENCHMARK_MID_SPEC
+
+constexpr int max = 100000000;
+constexpr int run_num = 5;
+
+#endif // PARALLEL_BENCHMARK_MID_SPEC
+
+#ifdef PARALLEL_BENCHMARK_HIGH_SPEC
+
+constexpr int max = 1000000000; // require more than 4 GB RAM
+constexpr int run_num = 8;
+
+#endif // PARALLEL_BENCHMARK_HIGH_SPEC
+
 constexpr int multiplier = 10;
 constexpr int min = 10;
-constexpr int max = 10000000;
 constexpr auto unit = benchmark::kMicrosecond;
-constexpr int run_num = 5;
 
 #define BENCHMARK_SEARCH(benchmark_name, function_name) \
 static void benchmark_name(benchmark::State& state) \

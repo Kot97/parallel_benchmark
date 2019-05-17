@@ -1,14 +1,36 @@
 #ifndef PARALLEL_BENCHMARK_BENCHMARK_PARAMETERS_2_HPP
 #define PARALLEL_BENCHMARK_BENCHMARK_PARAMETERS_2_HPP
 
+#include "spec.hpp"
 #include <benchmark/benchmark.h>
+
+#ifdef PARALLEL_BENCHMARK_LOW_SPEC
+
+constexpr int max1 = 30;
+constexpr int max2 = 70;
+constexpr int run_num = 3;
+
+#endif // PARALLEL_BENCHMARK_LOW_SPEC
+
+#ifdef PARALLEL_BENCHMARK_MID_SPEC
+
+constexpr int max1 = 40;
+constexpr int max2 = 80;
+constexpr int run_num = 5;
+
+#endif // PARALLEL_BENCHMARK_MID_SPEC
+
+#ifdef PARALLEL_BENCHMARK_HIGH_SPEC
+
+constexpr int max1 = 50;
+constexpr int max2 = 85;
+constexpr int run_num = 8;
+
+#endif // PARALLEL_BENCHMARK_HIGH_SPEC
 
 constexpr int step = 5;
 constexpr int min = 5;
-constexpr int max1 = 35;
-constexpr int max2 = 85;
 constexpr auto unit = benchmark::kMicrosecond;
-constexpr int run_num = 3;
 
 static void args1(benchmark::internal::Benchmark* b) 
 {
