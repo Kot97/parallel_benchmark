@@ -2,6 +2,7 @@
 #define PARALLEL_BENCHMARK_SERIAL_2_HPP
 
 #include <unordered_map>
+#include "../../cutoffs.h"
 
 unsigned long cpp2_serial_rec(long n)
 {

@@ -3,12 +3,7 @@
 
 #include <tbb/task.h>
 #include <tbb/concurrent_hash_map.h>
-
-unsigned long cpp2_serial_rec_p(long n)
-{
-    if(n <= 2)  return 1;
-    return cpp2_serial_rec_p(n-1) + cpp2_serial_rec_p(n-2);
-}
+#include "serial_.hpp"
 
 using cache_t = tbb::concurrent_hash_map<long, unsigned long>;
 cache_t cache; 
@@ -33,7 +28,7 @@ public:
 
     tbb::task* execute() override
     {
-        if(n < 20) *sum = cpp2_serial_rec_p(n);
+        if(n < CUTOFF2) *sum = cpp2_serial_rec(n);
         else
         {
             unsigned long i, j;
@@ -50,7 +45,7 @@ public:
 
 unsigned long cpp2_tbb(long n)
 {
-    if(n <= 2) return 1;
+    if(n < CUTOFF2) return cpp2_serial_rec(n);
     unsigned long ret;
     fib_task& a = *new(tbb::task::allocate_root()) fib_task(n, &ret);
     tbb::task::spawn_root_and_wait(a);
@@ -66,7 +61,7 @@ public:
 
     tbb::task* execute() override
     {
-        if(n < 20) *sum = cpp2_serial_rec_dict_p(n);
+        if(n < CUTOFF2) *sum = cpp2_serial_rec_dict_p(n);
         else
         {
             unsigned long i, j, count = 1;
@@ -80,8 +75,7 @@ public:
             }
             else
             {
-                if(cache.find(acc, n-1))
-                    i = (*acc).second;   
+                if(cache.find(acc, n-1)) i = (*acc).second;   
                 else
                 {
                     a = new(allocate_child()) fib_task_dict(n-1, &i);
@@ -89,8 +83,7 @@ public:
                 }
                 acc.release();
 
-                if(cache.find(acc, n-2))
-                    j = (*acc).second;   
+                if(cache.find(acc, n-2)) j = (*acc).second;   
                 else
                 {
                     b = new(allocate_child()) fib_task_dict(n-2, &j);
@@ -108,7 +101,7 @@ public:
                 cache.insert(std::make_pair(n-1, i));
                 cache.insert(std::make_pair(n-2, j));
             }
-            if(count == 2)
+            else if(count == 2)
             {
                 if(a)
                 { 
@@ -129,7 +122,7 @@ public:
 
 unsigned long cpp2_tbb_dict(long n)
 {
-    if(n <= 2) return 1;
+    if(n < CUTOFF2) return cpp2_serial_rec_dict(n);
     unsigned long ret;
     fib_task_dict& a = *new(tbb::task::allocate_root()) fib_task_dict(n, &ret);
     tbb::task::spawn_root_and_wait(a);
