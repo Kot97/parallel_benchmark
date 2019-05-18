@@ -1,8 +1,7 @@
 #include "parameters1.hpp"
-#include "../src/1/c/serial_.h"
+#include "../src/1/serial_.h"
 #include "../src/1/c/pthread_.h"
 #include "../src/1/c/openmp_.h"
-#include "../src/1/cpp/serial_.hpp"
 #include "../src/1/cpp/std_.hpp"
 #include "../src/1/cpp/tbb_.hpp"
 
@@ -19,6 +18,5 @@ BENCHMARK_VECTOR_MULT(BM_openmp_parallel_for_simd, c1_openmp_parallel_for_simd)
 
 // --- C++ ---
 
-BENCHMARK_VECTOR_MULT(BM_serial, cpp1_serial)
 BENCHMARK_VECTOR_MULT(BM_std, cpp1_thread)
 BENCHMARK_VECTOR_MULT(BM_tbb, cpp1_tbb)
