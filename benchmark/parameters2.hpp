@@ -6,7 +6,7 @@
 
 #ifdef PARALLEL_BENCHMARK_LOW_SPEC
 
-constexpr int max1 = 30;
+constexpr int max1 = 35;
 constexpr int max2 = 70;
 constexpr int run_num = 3;
 
@@ -14,7 +14,7 @@ constexpr int run_num = 3;
 
 #ifdef PARALLEL_BENCHMARK_MID_SPEC
 
-constexpr int max1 = 40;
+constexpr int max1 = 45;
 constexpr int max2 = 80;
 constexpr int run_num = 5;
 
@@ -77,6 +77,19 @@ static void benchmark_name(benchmark::State& state)\
     }\
 }\
 BENCHMARK(benchmark_name)->Apply(args2)->Unit(unit)->UseRealTime()->Repetitions(run_num);
+
+#define BENCHMARK_FIBONACCI_MAP_LOW(benchmark_name, function_name, map_name)\
+static void benchmark_name(benchmark::State& state)\
+{\
+    for (auto _ : state)\
+    {\
+        state.PauseTiming();\
+        map_name.clear();\
+        state.ResumeTiming();\
+        function_name(state.range(0));\
+    }\
+}\
+BENCHMARK(benchmark_name)->Apply(args1)->Unit(unit)->UseRealTime()->Repetitions(run_num);
 
 
 
