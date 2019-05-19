@@ -6,7 +6,7 @@
 #include "../src/3/cpp/tbb_.hpp"
 
 // clang++ -o benchmark3.out benchmark3.cpp -lbenchmark -lbenchmark_main -fopenmp -lpthread -ltbb
-// ./benchmark3.out --benchmark_out="../data/1/benchmark3.json" --benchmark_out_format=json --benchmark_report_aggregates_only=true
+// ./benchmark3.out --benchmark_out="../data/x/benchmark3.json" --benchmark_out_format=json --benchmark_report_aggregates_only=true
 
 // ---- C ----
 
