@@ -2,7 +2,6 @@
 #define PARALLEL_BENCHMARK_MPI_1_HPP
 
 #include <boost/mpi.hpp>
-#include <vector>
 #include "../serial_.h"
 
 namespace mpi = boost::mpi;
