@@ -10,31 +10,27 @@ namespace mpi = boost::mpi;
 void _cpp1_mpi_rank0(const mpi::communicator& comm, double *result, const double *a, const double *b, unsigned long size)
 {
     int num = comm.size();
-    int rest = size % num;
 
-    mpi::request **req = new mpi::request*[3];
-    for(int i = 0; i < 3; ++i) req[i] = new mpi::request[num-1];
+    mpi::request **req = new mpi::request*[2];
+    for(int i = 0; i < 2; ++i) req[i] = new mpi::request[num-1];
 
     unsigned long inc = size/num;   // increment : size of block per node
-
+    int rest = size % num;
     const double *a_ = a + inc, *b_ = b + inc;
 
     for(int i = 1; i < num - 1; ++i, a_+= inc, b_+=inc)
     {
-        req[0][i-1] = comm.isend(i, 0, inc);
-        req[1][i-1] = comm.isend(i, 1, a_, inc);
-        req[2][i-1] = comm.isend(i, 2, b_, inc);
+        req[0][i-1] = comm.isend(i, 1, a_, inc);
+        req[1][i-1] = comm.isend(i, 2, b_, inc);
     }
 
-    req[0][num-2] = comm.isend(num-1, 0, inc + rest);
-    req[1][num-2] = comm.isend(num-1, 1, a_, inc + rest);
-    req[2][num-2] = comm.isend(num-1, 2, b_, inc + rest);
+    req[0][num-2] = comm.isend(num-1, 1, a_, inc + rest);
+    req[1][num-2] = comm.isend(num-1, 2, b_, inc + rest);
 
     c1_serial(result, a, b, inc);
 
     mpi::wait_all(req[0], req[0] + num - 1); 
     mpi::wait_all(req[1], req[1] + num - 1); 
-    mpi::wait_all(req[2], req[2] + num - 1); 
 
     double *result_ = result + inc;
 
@@ -45,14 +41,16 @@ void _cpp1_mpi_rank0(const mpi::communicator& comm, double *result, const double
 
     mpi::wait_all(req[0], req[0] + num - 1);
 
-    for(int i = 0; i < 3; ++i) delete[] req[i];
+    for(int i = 0; i < 2; ++i) delete[] req[i];
     delete[] req;
 }
 
 void _cpp1_mpi_others(const mpi::communicator& comm)
 {
     unsigned long size;
-    comm.recv(0, 0, size);
+    mpi::status stat = comm.probe(0, 1);
+    if(stat.count<unsigned long>()) size = *stat.count<unsigned long>();
+    else comm.abort(11);
 
     double *result = (double*)std::malloc(sizeof(double) * size);
     double *a = (double*)std::malloc(sizeof(double) * size);
