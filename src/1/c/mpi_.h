@@ -3,7 +3,7 @@
 
 #include <mpi.h>
 #include <stdlib.h>
-#include "../serial_.h"
+#include "openmp_.h"
 
 void _c1_mpi_rank0(const MPI_Comm comm, double *result, const double *a, const double *b, unsigned long size)
 {
@@ -27,7 +27,7 @@ void _c1_mpi_rank0(const MPI_Comm comm, double *result, const double *a, const d
     MPI_Isend(a_, inc_rest, MPI_DOUBLE, num-1, 1, comm, &(req[0][num-2]));
     MPI_Isend(b_, inc_rest, MPI_DOUBLE, num-1, 2, comm, &(req[1][num-2]));
 
-    c1_serial(result, a, b, inc);
+    c1_openmp_parallel_for_simd(result, a, b, inc);
 
     MPI_Waitall(num-1, req[0], MPI_STATUS_IGNORE);
     MPI_Waitall(num-1, req[1], MPI_STATUS_IGNORE);
@@ -61,7 +61,7 @@ void _c1_mpi_others(const MPI_Comm comm)
     MPI_Irecv(b, size, MPI_DOUBLE, 0, 2, comm, req+1);
     MPI_Waitall(2, req, MPI_STATUS_IGNORE);
 
-    c1_serial(result, a, b, size);
+    c1_openmp_parallel_for_simd(result, a, b, size);
     MPI_Send(result, size, MPI_DOUBLE, 0, 3, comm);
     free(result); free(a); free(b);
 }
