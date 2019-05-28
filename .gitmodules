@@ -1,0 +1,9 @@
+[submodule "dependency/googlebenchmark"]
+	path = dependency/googlebenchmark
+	url = git@github.com:google/benchmark.git
+[submodule "dependency/googletest"]
+	path = dependency/googletest
+	url = git@github.com:google/googletest.git
+[submodule "dependency/bmplot"]
+	path = dependency/bmplot
+	url = https://github.com/Kot97/bmplot.git
