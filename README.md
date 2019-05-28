@@ -19,9 +19,16 @@ Project structure:
 
 Unit tests: googletest  
 Benchmarks: googlebenchmark  
-Plots: matplotlib  
+Plots: bmplot
 
-Environment:  
-1)Ubuntu 19.04 Linux 5.0.0 64 bit  
-  Intel Core i5-3570K 3.40 GHz (4 threads)  
-  3.8 GiB RAM  
+Test compilation and run:  
+cd test clang++ -o all.test test_all.cpp -lgtest -fopenmp -lpthread -ltbb  
+./all.test  
+MPI Test compilation and run on N nodes:  
+mpic++ -o mpi_c.test mpi_c_test.cpp -lgtest -lpthread  
+mpic++ -o mpi_cpp.test mpi_cpp_test.cpp -lgtest -lpthread -lboost_mpi  
+mpirun -n N mpi_c.test  
+mpirun -n N mpi_cpp.test  
+
+Benchmarks compilation and run:  
+build commands are in .cpp files  
