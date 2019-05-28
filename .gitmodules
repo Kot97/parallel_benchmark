@@ -7,3 +7,9 @@
 [submodule "dependency/bmplot"]
 	path = dependency/bmplot
 	url = https://github.com/Kot97/bmplot.git
+[submodule "dependency/Boost.MPI"]
+	path = dependency/Boost.MPI
+	url = https://github.com/boostorg/mpi
+[submodule "dependency/tbb"]
+	path = dependency/tbb
+	url = https://github.com/intel/tbb
