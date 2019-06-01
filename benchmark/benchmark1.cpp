@@ -1,9 +1,14 @@
 #include "parameters1.hpp"
-#include "../src/1/serial_.h"
-#include "../src/1/c/pthread_.h"
-#include "../src/1/c/openmp_.h"
-#include "../src/1/cpp/std_.hpp"
-#include "../src/1/cpp/tbb_.hpp"
+// #include "../src/1/c/serial_.h"
+// #include "../src/1/c/pthread_.h"
+// #include "../src/1/c/openmp_.h"
+// #include "../src/1/cpp/std_.hpp"
+// #include "../src/1/cpp/tbb_.hpp"
+#include <1/c/serial_.h>
+#include <1/c/pthread_.h>
+#include <1/c/openmp_.h>
+#include <1/cpp/std_.hpp>
+#include <1/cpp/tbb_.hpp>
 
 // clang++ -o benchmark1.out benchmark1.cpp -lbenchmark -lbenchmark_main -fopenmp -lpthread -ltbb
 // ./benchmark1.out --benchmark_out="../data/x/benchmark1.json" --benchmark_out_format=json --benchmark_report_aggregates_only=true

@@ -1,6 +1,8 @@
 #include "parameters2.hpp"
-#include "../src/2/c/serial_.h"
-#include "../src/2/c/openmp_.h"
+// #include "../src/2/c/serial_.h"
+// #include "../src/2/c/openmp_.h"
+#include <2/c/serial_.h>
+#include <2/c/openmp_.h>
 
 // clang++ -o benchmark2c.out benchmark2c.cpp -lbenchmark -lbenchmark_main -fopenmp -lpthread 
 // ./benchmark2c.out --benchmark_out="../data/x/benchmark2c.json" --benchmark_out_format=json --benchmark_report_aggregates_only=true

@@ -49,4 +49,4 @@ TEST_P(Fibonacci2Test, test_name)\
     EXPECT_EQ(function_name(GetParam().first), GetParam().second);\
 }
 
-#endif //!PARALLEL_BENCHMARK_FIBONACCI_TEST_HPP
+#endif

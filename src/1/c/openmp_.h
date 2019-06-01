@@ -4,7 +4,7 @@
 #include <omp.h>
 #include <stddef.h>
 #include <stdio.h>
-#include "../serial_.h"
+#include "serial_.h"
 
 void c1_openmp_parallel(double *result, const double *a, const double *b, unsigned long size);
 void c1_openmp_parallel_for(double *result, const double *a, const double *b, unsigned long size);

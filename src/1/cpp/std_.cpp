@@ -20,7 +20,7 @@ void _cpp1_thread(int id, double *result, const double *a, const double *b, unsi
 
 void cpp1_thread(double *result, const double *a, const double *b, unsigned long size)
 {
-    if(size < CUTOFF1) { c1_serial(result, a, b, size); return; }
+    if(size < CUTOFF1) { cpp1_serial(result, a, b, size); return; }
     std::vector<std::thread> threads;
 
     for(int i = 0; i < num_threads2; ++i)

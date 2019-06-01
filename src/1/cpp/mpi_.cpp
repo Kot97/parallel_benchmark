@@ -20,7 +20,7 @@ void _cpp1_mpi_rank0(const mpi::communicator& comm, double *result, const double
     req[0][num-2] = comm.isend(num-1, 1, a_, inc + rest);
     req[1][num-2] = comm.isend(num-1, 2, b_, inc + rest);
 
-    c1_serial(result, a, b, inc);
+    cpp1_serial(result, a, b, inc);
 
     mpi::wait_all(req[0], req[0] + num - 1); 
     mpi::wait_all(req[1], req[1] + num - 1); 
@@ -54,7 +54,7 @@ void _cpp1_mpi_others(const mpi::communicator& comm)
     req[1] = comm.irecv(0, 2, b, size);
     mpi::wait_all(req, req+2);
 
-    c1_serial(result, a, b, size);
+    cpp1_serial(result, a, b, size);
     comm.send(0, 3, result, size);
     free(result); free(a); free(b);
 }
@@ -63,7 +63,7 @@ void cpp1_mpi(const mpi::communicator& comm, double *result, const double *a, co
 {
     if(size < CUTOFF1) 
     { 
-       if(comm.rank() == 0) c1_serial(result, a, b, size);
+       if(comm.rank() == 0) cpp1_serial(result, a, b, size);
        return;
     }
     if(comm.rank() == 0) _cpp1_mpi_rank0(comm, result, a, b, size);
@@ -133,7 +133,7 @@ void cpp1_mpi_tbb(const mpi::communicator& comm, double *result, const double *a
 {
     if(size < CUTOFF1) 
     { 
-       if(comm.rank() == 0) c1_serial(result, a, b, size);
+       if(comm.rank() == 0) cpp1_serial(result, a, b, size);
        return;
     }
     if(comm.rank() == 0) _cpp1_mpi_rank0_tbb(comm, result, a, b, size);

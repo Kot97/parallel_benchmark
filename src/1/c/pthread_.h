@@ -4,7 +4,7 @@
 #include <pthread.h>
 #include <stddef.h>
 #include <stdlib.h>
-#include "../serial_.h"
+#include "serial_.h"
 
 typedef struct
 {

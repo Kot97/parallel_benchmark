@@ -3,7 +3,7 @@
 
 #include <boost/mpi.hpp>
 #include <cstdlib>
-#include "../serial_.h"
+#include "serial_.hpp"
 #include "tbb_.hpp"
 
 namespace mpi = boost::mpi;

@@ -157,4 +157,4 @@ TEST_P(VectorMultTest, test_name)\
     function_name(res, a, b, size);\
 }
 
-#endif // !1PARALLEL_BENCHMARK_VECTOR_MULT_TEST_HPP
+#endif

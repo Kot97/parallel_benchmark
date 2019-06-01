@@ -39,4 +39,4 @@ TEST_P(SearchTest, test_name)\
     ASSERT_DOUBLE_EQ(function_name(a, b), GetParam().second);\
 }
 
-#endif // !1PARALLEL_BENCHMARK_TEST_SEARCH_HPP
+#endif
