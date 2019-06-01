@@ -1,5 +1,7 @@
 #include "tbb_.hpp"
 
+cache_t cache; 
+
 unsigned long cpp2_serial_rec_dict_p(long n)
 {
     if (n <= 2) return 1;

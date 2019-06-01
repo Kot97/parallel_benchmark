@@ -6,7 +6,6 @@ unsigned long c2_serial_rec(long n)
     return c2_serial_rec(n-1) + c2_serial_rec(n-2);
 }
 
-#define DCACHE_SIZE 50
 unsigned long dictionary[DCACHE_SIZE] = { 0 };
 
 unsigned long c2_serial_rec_dict(long n)

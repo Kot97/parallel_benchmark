@@ -6,7 +6,7 @@
 #include "serial_.hpp"
 
 using cache_t = tbb::concurrent_hash_map<long, unsigned long>;
-cache_t cache; 
+extern cache_t cache;
 
 unsigned long cpp2_serial_rec_dict_p(long n);
 

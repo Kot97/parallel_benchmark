@@ -1,9 +1,9 @@
 add_library( lib3c 
-    ${PROJECT_SOURCE_DIR}/src/3/c/serial_.h ${PROJECT_SOURCE_DIR}/src/3/c/serial_.c 
-    ${PROJECT_SOURCE_DIR}/src/3/c/openmp_.h ${PROJECT_SOURCE_DIR}/src/3/c/openmp_.c )
-target_link_libraries(lib3c -fopenmp -lpthread)
+    serial_.h serial_.c 
+    openmp_.h openmp_.c )
+target_include_directories(lib3c PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_library( lib3cmpi 
-    ${PROJECT_SOURCE_DIR}/src/3/c/openmp_.h ${PROJECT_SOURCE_DIR}/src/3/c/openmp_.c 
-    ${PROJECT_SOURCE_DIR}/src/3/c/mpi_.h ${PROJECT_SOURCE_DIR}/src/3/c/mpi_.c )
-target_link_libraries(lib3cmpi -fopenmp)
+    openmp_.h openmp_.c 
+    mpi_.h mpi_.c )
+target_include_directories(lib3cmpi PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

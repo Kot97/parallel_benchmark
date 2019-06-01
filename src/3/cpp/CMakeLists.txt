@@ -1,10 +1,10 @@
 add_library( lib3cpp
-    ${PROJECT_SOURCE_DIR}/src/3/cpp/serial_.hpp ${PROJECT_SOURCE_DIR}/src/3/cpp/serial_.cpp 
-    ${PROJECT_SOURCE_DIR}/src/3/cpp/std_.hpp ${PROJECT_SOURCE_DIR}/src/3/cpp/std_.cpp 
-    ${PROJECT_SOURCE_DIR}/src/3/cpp/tbb_.hpp ${PROJECT_SOURCE_DIR}/src/3/cpp/tbb_.cpp )
-target_link_libraries(lib3cpp -ltbb -lpthread)
+    serial_.hpp serial_.cpp 
+    std_.hpp std_.cpp 
+    tbb_.hpp tbb_.cpp )
+target_include_directories(lib3cpp PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_library( lib3cppmpi 
-    ${PROJECT_SOURCE_DIR}/src/3/cpp/tbb_.hpp ${PROJECT_SOURCE_DIR}/src/3/cpp/tbb_.cpp
-    ${PROJECT_SOURCE_DIR}/src/3/cpp/mpi_.hpp ${PROJECT_SOURCE_DIR}/src/3/cpp/mpi_.cpp )
-target_link_libraries(lib3cppmpi -ltbb -lpthread -lboost_mpi)
+    tbb_.hpp tbb_.cpp
+    mpi_.hpp mpi_.cpp )
+target_include_directories(lib3cppmpi PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

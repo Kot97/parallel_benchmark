@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include "../../cutoffs.h"
 
-std::unordered_map<long, unsigned long> map;
+extern std::unordered_map<long, unsigned long> map;
 
 unsigned long cpp2_serial_rec(long n);
 unsigned long cpp2_serial_rec_dict(long n);

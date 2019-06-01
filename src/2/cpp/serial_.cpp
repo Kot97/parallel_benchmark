@@ -6,6 +6,8 @@ unsigned long cpp2_serial_rec(long n)
     return cpp2_serial_rec(n-1) + cpp2_serial_rec(n-2);
 }
 
+std::unordered_map<long, unsigned long> map;
+
 unsigned long cpp2_serial_rec_dict(long n)
 {
     if (n <= 2) return 1;

@@ -21,6 +21,9 @@ unsigned long cpp2_async(long n)
     return task1.get() + task2.get();
 }
 
+std::unordered_map<long, unsigned long> map2;
+std::mutex mutex;
+
 unsigned long cpp2_task_dict(long n)
 {
     if(n < CUTOFF2) return cpp2_serial_rec_dict(n);

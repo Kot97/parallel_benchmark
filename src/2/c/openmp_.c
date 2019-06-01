@@ -22,7 +22,6 @@ unsigned long c2_openmp_task_rec(long n)
     return ret;
 }
 
-#define DCACHE_SIZE 50
 unsigned long dictionary[DCACHE_SIZE] = { 0 };
 omp_lock_t dictionary_lock[DCACHE_SIZE];
 
