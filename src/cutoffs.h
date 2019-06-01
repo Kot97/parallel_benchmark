@@ -13,6 +13,6 @@
 #define CUTOFF2 18
 #define CUTOFF3 500
 
-#endif // !PARALLEL_BENCHMARK_TEST
+#endif 
 
-#endif // !PARALLEL_BENCHMARK_CUTOFFS_H
+#endif
