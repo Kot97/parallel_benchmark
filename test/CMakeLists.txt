@@ -12,6 +12,4 @@ add_test(NAME all COMMAND all.test)
 add_executable( mpi.test mpi_test.cpp )
 target_link_libraries( mpi.test 
                     1mpi 3mpi 
-                    -lgtest -lpthread ${MPI_C_LIBRARIES} )
-
-add_test(NAME mpi COMMAND mpi.test)
+                    -lgtest -lpthread ${MPI_LIBRARIES} )
