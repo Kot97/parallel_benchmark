@@ -20,7 +20,7 @@ void _c3_mpi_rank0(const MPI_Comm comm, double *max, const double *a, const doub
     
     MPI_Waitall(num-1, req, MPI_STATUS_IGNORE);
 
-    MPI_Reduce(max, max, 1, MPI_DOUBLE, MPI_MAX, 0, comm);
+    MPI_Reduce(MPI_IN_PLACE, max, 1, MPI_DOUBLE, MPI_MAX, 0, comm);
     free(req);
 }
 
@@ -74,7 +74,7 @@ void _c3_mpi_rank0_openmp(const MPI_Comm comm, double *max, const double *a, con
     
     MPI_Waitall(num-1, req, MPI_STATUS_IGNORE);
 
-    MPI_Reduce(max, max, 1, MPI_DOUBLE, MPI_MAX, 0, comm);
+    MPI_Reduce(MPI_IN_PLACE, max, 1, MPI_DOUBLE, MPI_MAX, 0, comm);
     free(req);
 }
 
