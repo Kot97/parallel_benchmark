@@ -47,4 +47,23 @@ static void benchmark_name(benchmark::State& state) \
 }\
 BENCHMARK(benchmark_name)->RangeMultiplier(multiplier)->Range(min, max)->Unit(unit)->UseRealTime()->Repetitions(run_num);
 
-#endif // !1PARALLEL_BENCHMARK_BENCHMARK_PARAMETERS_2_HPP
+#define MPI_BENCHMARK_SEARCH(benchmark_name, function_name) \
+static void benchmark_name(benchmark::State& state) \
+{\
+    for (auto _ : state)\
+    {\
+        state.PauseTiming();\
+        unsigned long size = state.range(0);\
+        double *a = (double*)malloc(sizeof(double)*size);\
+        double *max = (double*)malloc(sizeof(double));\
+        state.ResumeTiming();\
+        function_name(MPI_COMM_WORLD, max, a, a + size);\
+        state.PauseTiming();\
+        free(a);\
+        free(max);\
+        state.ResumeTiming();\
+    }\
+}\
+BENCHMARK(benchmark_name)->RangeMultiplier(multiplier)->Range(min, max)->Unit(unit)->UseRealTime()->Repetitions(run_num);
+
+#endif

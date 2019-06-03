@@ -91,6 +91,4 @@ static void benchmark_name(benchmark::State& state)\
 }\
 BENCHMARK(benchmark_name)->Apply(args1)->Unit(unit)->UseRealTime()->Repetitions(run_num);
 
-
-
-#endif // !1PARALLEL_BENCHMARK_BENCHMARK_PARAMETERS_2_HPP
+#endif

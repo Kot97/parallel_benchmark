@@ -1,13 +1,9 @@
 #include "parameters2.hpp"
-// #include "../src/2/cpp/serial_.hpp"
-// #include "../src/2/cpp/std_.hpp"
-// #include "../src/2/cpp/tbb_.hpp"
 #include <2/cpp/serial_.hpp>
 #include <2/cpp/std_.hpp>
 #include <2/cpp/tbb_.hpp>
 
-// clang++ -o benchmark2cpp.out benchmark2cpp.cpp -lbenchmark -lbenchmark_main -lpthread -ltbb
-// ./benchmark2cpp.out --benchmark_out="../data/x/benchmark2cpp.json" --benchmark_out_format=json --benchmark_report_aggregates_only=true
+// ./benchmark2cpp --benchmark_out="../../data/x/benchmark2cpp.json" --benchmark_out_format=json --benchmark_report_aggregates_only=true
 
 BENCHMARK_FIBONACCI(BM_cpp_serial_rec, cpp2_serial_rec)
 BENCHMARK_FIBONACCI_MAP(BM_cpp_serial_rec_dict, cpp2_serial_rec_dict, map)
