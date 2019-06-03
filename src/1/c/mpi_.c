@@ -9,7 +9,7 @@ void _c1_mpi_rank0(const MPI_Comm comm, double *result, const double *a, const d
     for(int i = 0; i < 2; ++i) req[i] = (MPI_Request*)malloc(sizeof(MPI_Request) * (num-1));
 
     unsigned long inc = size/num;   // increment : size of block per node
-    int rest = size % num;
+    unsigned int rest = size % num;
     const double *a_ = a + inc, *b_ = b + inc;
 
     for(int i = 1; i < num - 1; ++i, a_+= inc, b_+=inc)
@@ -26,6 +26,7 @@ void _c1_mpi_rank0(const MPI_Comm comm, double *result, const double *a, const d
 
     MPI_Waitall(num-1, req[0], MPI_STATUS_IGNORE);
     MPI_Waitall(num-1, req[1], MPI_STATUS_IGNORE);
+
 
     double *result_ = result + inc;
 

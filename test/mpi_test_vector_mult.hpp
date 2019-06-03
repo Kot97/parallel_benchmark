@@ -6,8 +6,9 @@
 #include <tuple>
 #include <vector>
 #include <1/c/mpi_.h>
+// #include "../src/1/c/mpi_.h"
 
-class CMpiVectorMultNotSetTest : public ::testing::TestWithParam<unsigned long>
+class MpiVectorMultNotSetTest : public ::testing::TestWithParam<unsigned long>
 {
 public:
     double *res, *a, *b;
@@ -30,17 +31,17 @@ public:
         free(res); free(a); free(b);
     }
 };
-INSTANTIATE_TEST_SUITE_P(SmallSize, CMpiVectorMultNotSetTest, ::testing::Range(2ul, 100ul));
-INSTANTIATE_TEST_SUITE_P(MediumSize, CMpiVectorMultNotSetTest, 
+INSTANTIATE_TEST_SUITE_P(SmallSize, MpiVectorMultNotSetTest, ::testing::Range(2ul, 100ul));
+INSTANTIATE_TEST_SUITE_P(MediumSize, MpiVectorMultNotSetTest, 
 ::testing::Values(
     1000, 1001, 1003, 4578, 11203, 76711
 ));
-INSTANTIATE_TEST_SUITE_P(LargeSize, CMpiVectorMultNotSetTest, 
+INSTANTIATE_TEST_SUITE_P(LargeSize, MpiVectorMultNotSetTest, 
 ::testing::Values(
     100000, 100002, 100005, 200123, 340028, 1000000, 1000008
 ));
 
-class CMpiVectorMultSetTest : public ::testing::TestWithParam<std::tuple<unsigned long, double, double, double>>
+class MpiVectorMultSetTest : public ::testing::TestWithParam<std::tuple<unsigned long, double, double, double>>
 {
 public:
     double *res, *a, *b;
@@ -76,7 +77,7 @@ public:
         free(res); free(a); free(b);
     }
 };
-INSTANTIATE_TEST_SUITE_P(SmallSizeInt, CMpiVectorMultSetTest,
+INSTANTIATE_TEST_SUITE_P(SmallSizeInt, MpiVectorMultSetTest,
 ::testing::Values(
     std::make_tuple(4, 2, 3, 6),
     std::make_tuple(19, 2, 3, 6),
@@ -84,7 +85,7 @@ INSTANTIATE_TEST_SUITE_P(SmallSizeInt, CMpiVectorMultSetTest,
     std::make_tuple(93, 2, 3, 6),
     std::make_tuple(199, 2, 3, 6)
 ));
-INSTANTIATE_TEST_SUITE_P(SmallSizeDouble, CMpiVectorMultSetTest,
+INSTANTIATE_TEST_SUITE_P(SmallSizeDouble, MpiVectorMultSetTest,
 ::testing::Values(
     std::make_tuple(4, 2.2, 3.3, 7.26),
     std::make_tuple(19, 2.2, 3.3, 7.26),
@@ -92,7 +93,7 @@ INSTANTIATE_TEST_SUITE_P(SmallSizeDouble, CMpiVectorMultSetTest,
     std::make_tuple(93, 2.2, 3.3, 7.26),
     std::make_tuple(199, 2.2, 3.3, 7.26)
 ));
-INSTANTIATE_TEST_SUITE_P(LargeSizeInt, CMpiVectorMultSetTest,
+INSTANTIATE_TEST_SUITE_P(LargeSizeInt, MpiVectorMultSetTest,
 ::testing::Values(
     std::make_tuple(1004, 2, 3, 6),
     std::make_tuple(15698, 2, 3, 6),
@@ -100,7 +101,7 @@ INSTANTIATE_TEST_SUITE_P(LargeSizeInt, CMpiVectorMultSetTest,
     std::make_tuple(234605, 2, 3, 6),
     std::make_tuple(1123544, 2, 3, 6)
 ));
-INSTANTIATE_TEST_SUITE_P(LargeSizeDouble, CMpiVectorMultSetTest,
+INSTANTIATE_TEST_SUITE_P(LargeSizeDouble, MpiVectorMultSetTest,
 ::testing::Values(
     std::make_tuple(1004, 2.2, 3.3, 7.26),
     std::make_tuple(15698, 2.2, 3.3, 7.26),
@@ -109,7 +110,7 @@ INSTANTIATE_TEST_SUITE_P(LargeSizeDouble, CMpiVectorMultSetTest,
     std::make_tuple(1123544, 2.2, 3.3, 7.26)
 ));
 
-class CMpiVectorMultTest : public ::testing::TestWithParam<
+class MpiVectorMultTest : public ::testing::TestWithParam<
         std::tuple<std::vector<double>, std::vector<double>, std::vector<double>>>
 {
 public:
@@ -139,13 +140,13 @@ public:
         free(res);
     }
 };
-INSTANTIATE_TEST_SUITE_P(Int, CMpiVectorMultTest,
+INSTANTIATE_TEST_SUITE_P(Int, MpiVectorMultTest,
 ::testing::Values(
     std::make_tuple(std::vector<double>{1,2,3,4}, std::vector<double>{1,2,3,4}, std::vector<double>{1,4,9,16}),
     std::make_tuple(std::vector<double>{6,7,8,9,10}, std::vector<double>{6,7,8,9,10}, std::vector<double>{36,49,64,81,100}),
     std::make_tuple(std::vector<double>{1001,1002,1003,10019}, std::vector<double>{1,1,1,1}, std::vector<double>{1001,1002,1003,10019})
 ));
-INSTANTIATE_TEST_SUITE_P(Double, CMpiVectorMultTest,
+INSTANTIATE_TEST_SUITE_P(Double, MpiVectorMultTest,
 ::testing::Values(
     std::make_tuple(std::vector<double>{1.1,2.2,3.3,4.4}, std::vector<double>{1,2,3,4}, std::vector<double>{1.1,4.4,9.9,17.6}),
     std::make_tuple(std::vector<double>{6.1,7.1,8.1,9.1,10.1}, std::vector<double>{6,7,8,9,10}, std::vector<double>{36.6,49.7,64.8,81.9,101}),
@@ -160,15 +161,15 @@ TEST(NullInput, test_name)\
 }
 
 #define C_MPI_TEST_VECTOR_MULT(test_name, function_name)\
-TEST_P(CMpiVectorMultSetTest, test_name)\
+TEST_P(MpiVectorMultSetTest, test_name)\
 {\
     function_name(comm, res, a, b, size);\
 }\
-TEST_P(CMpiVectorMultNotSetTest, test_name)\
+TEST_P(MpiVectorMultNotSetTest, test_name)\
 {\
     function_name(comm, res, a, b, size);\
 }\
-TEST_P(CMpiVectorMultTest, test_name)\
+TEST_P(MpiVectorMultTest, test_name)\
 {\
     function_name(comm, res, a, b, size);\
 }

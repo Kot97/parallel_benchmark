@@ -4,7 +4,7 @@ add_library( 1
     1/c/serial_.c 1/c/openmp_.c 1/c/pthread_.c 
     1/cpp/serial_.cpp 1/cpp/std_.cpp 1/cpp/tbb_.cpp )
 target_include_directories(1 PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
-target_link_libraries(1 -lpthread -fopenmp -ltbb)
+target_link_libraries(1 -lpthread -fopenmp)
 
 add_library( 1mpi 
     1/c/serial_.c 1/c/openmp_.c 1/c/mpi_.c )
