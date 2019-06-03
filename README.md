@@ -1,5 +1,5 @@
 Benchmark of parallel models:  
-    C: pthreads, OpenMP  
+    C: pthreads, OpenMP, MPI  
     C++: thread standard library, Intel TBB  
 
 Problems:  
@@ -17,18 +17,8 @@ Project structure:
     /plot/env/ - contain plots of task size vs execution time  
     /test/ - contain unit tests of solutions  
 
+Build system: CMake  
 Unit tests: googletest  
 Benchmarks: googlebenchmark  
 Plots: bmplot
 
-Test compilation and run:  
-cd test clang++ -o all.test test_all.cpp -lgtest -fopenmp -lpthread -ltbb  
-./all.test  
-MPI Test compilation and run on N nodes:  
-mpic++ -o mpi_c.test mpi_c_test.cpp -lgtest -lpthread  
-mpic++ -o mpi_cpp.test mpi_cpp_test.cpp -lgtest -lpthread -lboost_mpi  
-mpirun -n N mpi_c.test  
-mpirun -n N mpi_cpp.test  
-
-Benchmarks compilation and run:  
-build commands are in .cpp files  
