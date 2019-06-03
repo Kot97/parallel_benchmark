@@ -3,6 +3,14 @@
 
 #include "../../cutoffs.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 double c3_serial(const double *a, const double *b);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

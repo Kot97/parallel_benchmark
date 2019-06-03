@@ -8,6 +8,10 @@
 
 extern unsigned long dictionary[DCACHE_SIZE];
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 unsigned long _c2_openmp_task_rec(long n);
 unsigned long c2_openmp_task_rec(long n);
 
@@ -16,5 +20,9 @@ unsigned long c2_openmp_task_rec_dict_lock(long n);
 
 unsigned long _c2_openmp_task_rec_dict_critical(long n);
 unsigned long c2_openmp_task_rec_dict_critical(long n);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

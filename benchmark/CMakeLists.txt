@@ -1,17 +1,14 @@
-include_directories(../src)
-link_directories(../src)
-
 add_executable( benchmark1 benchmark1.cpp )
 target_link_libraries( benchmark1 PRIVATE
-                    lib1 -lbenchmark -lbenchmark_main )
+                    1 -lbenchmark -lbenchmark_main -ltbb)
 
 add_executable( benchmark2c benchmark2c.cpp )
 add_executable( benchmark2cpp benchmark2cpp.cpp )
 target_link_libraries( benchmark2c PRIVATE
-                    lib2c -lbenchmark -lbenchmark_main)
+                    2c -lbenchmark -lbenchmark_main)
 target_link_libraries( benchmark2cpp PRIVATE 
-                    lib2cpp -lbenchmark -lbenchmark_main)
+                    2cpp -lbenchmark -lbenchmark_main -ltbb)
 
 add_executable( benchmark3 benchmark3.cpp )
 target_link_libraries( benchmark3 PRIVATE
-                    lib3 -lbenchmark -lbenchmark_main )
+                    3 -lbenchmark -lbenchmark_main -ltbb)

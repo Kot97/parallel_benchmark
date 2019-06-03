@@ -6,7 +6,6 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 find_package(Threads REQUIRED)
 find_package(OpenMP REQUIRED)
 find_package(TBB REQUIRED)
-find_package(Boost COMPONENTS mpi REQUIRED)
 find_package(GTest REQUIRED)
 find_package(GoogleBenchmark REQUIRED)
 

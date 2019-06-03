@@ -1,23 +1,11 @@
 find_package(MPI REQUIRED)
 
-include_directories(../src/)
-link_directories(../src/)
+add_executable( all.test test_all.cpp )
+target_link_libraries( all.test 
+                1 2c 2cpp 3 
+                -lgtest -lgtest_main -ltbb)
 
-add_executable( test_all test_all.cpp 
-            test_c_fibonacci.hpp test_c_search.hpp test_c_vector_mult.hpp
-            test_cpp_fibonacci.hpp test_cpp_search.hpp test_cpp_vector_mult.hpp 
-            test_fibonacci.hpp test_search.hpp test_vector_mult.hpp)
-target_link_libraries( test_all 
-                lib1 lib2c lib2cpp lib3 
-                -lgtest -lgtest_main )
-
-add_executable( mpi_c mpi_c_test.cpp mpi_environment.hpp
-                mpi_test_c_search.hpp mpi_test_c_vector_mult.hpp )
-target_link_libraries( mpi_c 
-                    lib1mpi lib3mpi 
+add_executable( mpi.test mpi_test.cpp )
+target_link_libraries( mpi.test 
+                    1mpi 3mpi 
                     -lgtest -lgtest_main ${MPI_C_LIBRARIES} )
-add_executable( mpi_cpp mpi_cpp_test.cpp mpi_environment.hpp 
-                mpi_test_cpp_search.hpp mpi_test_cpp_vector_mult.hpp)
-target_link_libraries( mpi_cpp 
-                    lib1bmpi lib3bmpi 
-                    -lgtest -lgtest_main ${MPI_C_LIBRARIES})

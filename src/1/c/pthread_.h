@@ -16,7 +16,15 @@ typedef struct
 
 #define num_threads 4
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 void* _c1_pthread(void* f_arg);
 void c1_pthread(double *result, const double *a, const double *b, unsigned long size);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

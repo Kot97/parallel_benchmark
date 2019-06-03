@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <tuple>
 #include <vector>
-#include "../src/1/c/mpi_.h"
+#include <1/c/mpi_.h>
 
 class CMpiVectorMultNotSetTest : public ::testing::TestWithParam<unsigned long>
 {
